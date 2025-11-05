@@ -180,11 +180,15 @@ def cargar_estilos():
 # =============================================================================
 # CACHÉ PARA OPTIMIZACIÓN
 # =============================================================================
-@st.cache_data(ttl=3600)  # Cache por 1 hora
+
+url = "https://docs.google.com/spreadsheets/d/1QyaYcqSY_j1qn4sBPgEauSFN90eMTcxoMKF7vqRMy-0/edit?usp=sharing"
+
+@st.cache_data(ttl=600)
+
 def cargar_datos_originales():
     """Carga el archivo original con cache para mejor rendimiento"""
     try:
-        return pd.read_excel("APOTEOSYS 29 OCTUBRE.XLS")
+       df = pd.read_csv(url)
     except FileNotFoundError:
         st.error("❌ No se pudo encontrar el archivo 'APOTEOSYS 29 OCTUBRE.XLS'. Por favor verifica que el archivo esté en la ubicación correcta.")
         return None
